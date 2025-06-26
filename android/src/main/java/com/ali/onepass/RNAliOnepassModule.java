@@ -122,7 +122,7 @@ public class RNAliOnepassModule extends ReactContextBaseJavaModule implements To
       e.printStackTrace();
     }
     if (COMMON_PROMISE != null) {
-      COMMON_PROMISE.reject(tokenRet.getCode(), writableMap);
+      COMMON_PROMISE.reject(tokenRet.getCode(), s);
       COMMON_PROMISE = null;
     } else {
       sendEvent("onTokenFailed", writableMap);
