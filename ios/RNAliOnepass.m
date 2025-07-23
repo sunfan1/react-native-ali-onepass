@@ -99,10 +99,10 @@ RCT_EXPORT_METHOD(onePass:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseReje
                                                @"token": token!=nil ? token : @""
                                                }];
         } else if (resultCode==PNSCodeLoginControllerPresentSuccess) {
-            resolve(@{
-                        @"msg": msg!=nil ? msg: @"",
-                        @"code": resultCode!=nil?resultCode:@"",
-                    });
+//            resolve(@{
+//                        @"msg": msg!=nil ? msg: @"",
+//                        @"code": resultCode!=nil?resultCode:@"",
+//                    });
         } else if (resultCode==PNSCodeLoginControllerClickLoginBtn) {
             
             NSError *error = [[NSError alloc] initWithDomain:msg code:[resultCode intValue] userInfo:@{
@@ -418,6 +418,7 @@ RCT_EXPORT_METHOD(setDialogUIConfig:(NSDictionary *)config resolve:(RCTPromiseRe
     };
     // logo
     NSString *logoImgPath = [config objectForKey:[self methodName2KeyName:@"setLogoImgPath"]];
+//    NSLog(@"logoImgPath = %@", logoImgPath);
     if (logoImgPath != nil) {
         tXCustomModel.logoImage = [UIImage imageNamed:logoImgPath];
     }
@@ -501,8 +502,8 @@ RCT_EXPORT_METHOD(setDialogUIConfig:(NSDictionary *)config resolve:(RCTPromiseRe
             y = [logBtnOffsetY floatValue];
         }
         if (logBtnMarginLeftAndRight != nil) {
-            width = screenSize.width - [logBtnMarginLeftAndRight floatValue] * 2;
-            x = [logBtnMarginLeftAndRight floatValue] / 2;
+            width = superViewSize.width - [logBtnMarginLeftAndRight floatValue] * 2;
+            x = [logBtnMarginLeftAndRight floatValue];
         }
         return CGRectMake(x, y, width, height);
     };
@@ -639,6 +640,9 @@ RCT_EXPORT_METHOD(setDialogUIConfig:(NSDictionary *)config resolve:(RCTPromiseRe
             if (navText != nil) {
                 tXCustomModel.alertTitle = [[NSAttributedString alloc]initWithString:navText attributes:@{NSForegroundColorAttributeName: [self colorWithHexString:navTextColor], NSFontAttributeName:[UIFont systemFontOfSize:[navTextSize doubleValue]]}];
             }
+            tXCustomModel.alertTitleBarColor = [self colorWithHexString:navColor];
+            
+//            NSLog(@"alertContentViewColor = %@", navColor);
             NSString *navReturnImgPath = [config objectForKey:[self methodName2KeyName:@"setNavReturnImgPath"]];
             if (navReturnImgPath != nil) {
                 tXCustomModel.alertCloseImage = [UIImage imageNamed:navReturnImgPath];
